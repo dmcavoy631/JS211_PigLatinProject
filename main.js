@@ -12,10 +12,54 @@ const rl = readline.createInterface({
 
 
 const pigLatin = (word) => {
-
   // Your code here
 
+  // LowerCase and Remove spaces
+  word = word.toLowerCase()
+  word = word.trim()
+
+  // Move thru the word 1 letter at a time.
+  for(let i = 0; i < word.length; i++){
+    
+    // interating over the word
+  const letter = word.charAt(i);  
+
+    // Check if letter is a vowel
+    if (letter == 'a' || letter == 'e' || letter == 'i' || letter == 'o' || letter == 'u'){
+      
+      
+      //Call yayword function if 1st letter
+      if (i == 0){
+        return yayWord(word);
+      }
+
+      //Call ayword functions if no 1st letter
+      return ayWord(word,i);
+    }
+  }
 }
+
+//yayWord func
+const yayWord = (string) =>{
+  return(string + 'yay');
+}
+
+
+//ayWord func
+const ayWord = (string, pos) =>{
+  // concate end of string for pos with "sliced" 0 thru posistion of the vowel + ay
+
+  // slice out past the vowel  
+  let endStr = string.slice(pos);
+
+  // slice out to the vowel 0 - pos
+  let beginStr = string.slice(0, pos);
+
+  //concate and return
+  return endStr + beginStr + "ay";
+}
+
+
 
 // the first function called in the program to get an input from the user
 // to run the function use the command: node main.js
