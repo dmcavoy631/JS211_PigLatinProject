@@ -12,32 +12,65 @@ const rl = readline.createInterface({
 
 
 const pigLatin = (word) => {
-  // Your code here
 
-  // LowerCase and Remove spaces
-  word = word.toLowerCase()
-  word = word.trim()
+  // REGEX WAY
+  const latinSentence = []; // new PIG Latin sentence (array)
 
-  // Move thru the word 1 letter at a time.
-  for(let i = 0; i < word.length; i++){
-    
-    // interating over the word
-  const letter = word.charAt(i);  
+  // Lowercase work
+  word = word.toLowerCase();
+  // convert input to ARRAY - capture mult words. Populate array with words
+    const pigSentence = word.split(" ");
 
-    // Check if letter is a vowel
-    if (letter == 'a' || letter == 'e' || letter == 'i' || letter == 'o' || letter == 'u'){
-      
-      
-      //Call yayword function if 1st letter
-      if (i == 0){
-        return yayWord(word);
-      }
+  //For each word in array REGEX search and covert to pig latin
+  pigSentence.forEach(element => {
+  
+    // Find position of vowels via REGEX
+    let pos = element.search(/[aeiou]/i); 
 
-      //Call ayword functions if no 1st letter
-      return ayWord(word,i);
+    // If 1st letter is not a vowel, add "way" to word and push to latin array
+    if (pos == 0){
+      element += "yay";
+      latinSentence.push(element);
+
+    }else if (pos > 0 ){
+      // slice out from pos past the vowel  
+      let endStr = element.slice(pos);
+
+      // slice out from 0 to pos
+      let beginStr = element.slice(0, pos);
+
+      //flip strings and add new eding
+      element = endStr + beginStr + "ay";
+
+      //Push on to latin array
+      latinSentence.push(element);
     }
-  }
+  });
+
+  //Print the lating array as a string without ,'s
+  let result = latinSentence.join(" ");
+  return result;
 }
+
+  // ++++++++++++++ OLD CODE ++++++++++++++
+  // Move thru the word 1 letter at a time.
+
+  // for(let i = 0; i < word.length; i++){
+  //   // interating over the word
+  // const letter = word.charAt(i);  
+  //   // Check if letter is a vowel
+  //   if (letter == 'a' || letter == 'e' || letter == 'i' || letter == 'o' || letter == 'u'){
+  //     //Call yayword function if 1st letter
+  //     if (i == 0){
+  //       return yayWord(word);
+  //     }
+  //     //Call ayword functions if no 1st letter
+  //     return ayWord(word,i);
+  //   }
+  // }
+
+
+
 
 //yayWord func
 const yayWord = (string) =>{
