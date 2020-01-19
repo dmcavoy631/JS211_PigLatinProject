@@ -19,7 +19,7 @@ const pigLatin = (word) => {
   // Lowercase work
   word = word.toLowerCase();
   // convert input to ARRAY - capture mult words. Populate array with words
-    const pigSentence = word.split(" ");
+  const pigSentence = word.split(" ");
 
   //For each word in array REGEX search and covert to pig latin
   pigSentence.forEach(element => {
@@ -71,25 +71,25 @@ const pigLatin = (word) => {
 
 
 
-
+// ++++++++++++++ OLD CODE ++++++++++++++
 //yayWord func
-const yayWord = (string) =>{
-  return(string + 'yay');
-}
+//const yayWord = (string) =>{
+//  return(string + 'yay');
+//}
 
 
 //ayWord func
-const ayWord = (string, pos) =>{
+//const ayWord = (string, pos) =>{
   // concate end of string for pos with "sliced" 0 thru posistion of the vowel + ay
 
   // slice out past the vowel  
-  let endStr = string.slice(pos);
+  // let endStr = string.slice(pos);
 
   // slice out to the vowel 0 - pos
-  let beginStr = string.slice(0, pos);
+  // let beginStr = string.slice(0, pos);
 
   //concate and return
-  return endStr + beginStr + "ay";
+  // return endStr + beginStr + "ay";
 }
 
 
