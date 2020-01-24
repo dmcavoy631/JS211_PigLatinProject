@@ -1,32 +1,46 @@
 'use strict';
 
-// brings in the assert module for unit testing
-const assert = require('assert');
-// brings in the readline module to access the command line
-const readline = require('readline');
-// use the readline module to print out to the command line
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
+// // brings in the assert module for unit testing
+// const assert = require('assert');
+// // brings in the readline module to access the command line
+// const readline = require('readline');
+// // use the readline module to print out to the command line
+// const rl = readline.createInterface({
+//   input: process.stdin,
+//   output: process.stdout
+// });
 
+let input = "";
+let pigInput = "";
 
-const pigLatin = (word) => {
+// GUI SETUP
+//Clear text areas
+const clearTextAreas = () =>{
+  document.getElementById("translateInput").value = "";
+  document.getElementById("translateOutput").value = "";
+}
+
+const translateBtnClick = () =>{
+  pigInput = document.getElementById('translateInput').value;
+  pigLatin(pigInput);
+  
+  // STOPS FORM RELOAD
+  event.preventDefault()
+}
+
+const pigLatin = (input) => {
 
   // REGEX WAY
   const latinSentence = []; // new PIG Latin sentence (array)
 
   // Lowercase work
-  word = word.toLowerCase();
+  input = input.toLowerCase();
   // convert input to ARRAY - capture mult words. Populate array with words
-  const pigSentence = word.split(" ");
-
+  const pigSentence = input.split(" ");
   //For each word in array REGEX search and covert to pig latin
   pigSentence.forEach(element => {
-  
     // Find position of vowels via REGEX
     let pos = element.search(/[aeiou]/i); 
-
     // If 1st letter is not a vowel, add "way" to word and push to latin array
     if (pos == 0){
       element += "yay";
@@ -47,11 +61,10 @@ const pigLatin = (word) => {
     }
   });
 
-  //Print the lating array as a string without ,'s
+  //Print the latin array as a string without ,'s
   let result = latinSentence.join(" ");
-  return result;
+  document.getElementById("translateOutput").value = result;
 }
-
   // ++++++++++++++ OLD CODE ++++++++++++++
   // Move thru the word 1 letter at a time.
 
@@ -69,27 +82,23 @@ const pigLatin = (word) => {
   //   }
   // }
 
-
-
-// ++++++++++++++ OLD CODE ++++++++++++++
 //yayWord func
-//const yayWord = (string) =>{
-//  return(string + 'yay');
-//}
-
+const yayWord = (string) =>{
+  return(string + 'yay');
+}
 
 //ayWord func
-//const ayWord = (string, pos) =>{
+const ayWord = (string, pos) =>{
   // concate end of string for pos with "sliced" 0 thru posistion of the vowel + ay
 
   // slice out past the vowel  
-  // let endStr = string.slice(pos);
+  let endStr = string.slice(pos);
 
   // slice out to the vowel 0 - pos
-  // let beginStr = string.slice(0, pos);
+  let beginStr = string.slice(0, pos);
 
   //concate and return
-  // return endStr + beginStr + "ay";
+  return endStr + beginStr + "ay";
 }
 
 
@@ -97,41 +106,41 @@ const pigLatin = (word) => {
 // the first function called in the program to get an input from the user
 // to run the function use the command: node main.js
 // to close it ctrl + C
-const getPrompt = () => {
-  rl.question('word ', (answer) => {
-    console.log( pigLatin(answer) );
-    getPrompt();
-  });
-}
+// const getPrompt = () => {
+//   rl.question('word ', (answer) => {
+//     console.log( pigLatin(answer) );
+//     getPrompt();
+//   });
+// }
 
 // Unit Tests
 // You use them run the command: npm test main.js
 // to close them ctrl + C
-if (typeof describe === 'function') {
+// if (typeof describe === 'function') {
 
-  describe('#pigLatin()', () => {
-    it('should translate a simple word', () => {
-      assert.equal(pigLatin('car'), 'arcay');
-      assert.equal(pigLatin('dog'), 'ogday');
-    });
-    it('should translate a complex word', () => {
-      assert.equal(pigLatin('create'), 'eatecray');
-      assert.equal(pigLatin('valley'), 'alleyvay');
-    });
-    it('should attach "yay" if word begins with vowel', () => {
-      assert.equal(pigLatin('egg'), 'eggyay');
-      assert.equal(pigLatin('emission'), 'emissionyay');
-    });
-    it('should lowercase and trim word before translation', () => {
-      assert.equal(pigLatin('HeLlO '), 'ellohay');
-      assert.equal(pigLatin(' RoCkEt'), 'ocketray');
-    });
-  });
-} else {
+//   describe('#pigLatin()', () => {
+//     it('should translate a simple word', () => {
+//       assert.equal(pigLatin('car'), 'arcay');
+//       assert.equal(pigLatin('dog'), 'ogday');
+//     });
+//     it('should translate a complex word', () => {
+//       assert.equal(pigLatin('create'), 'eatecray');
+//       assert.equal(pigLatin('valley'), 'alleyvay');
+//     });
+//     it('should attach "yay" if word begins with vowel', () => {
+//       assert.equal(pigLatin('egg'), 'eggyay');
+//       assert.equal(pigLatin('emission'), 'emissionyay');
+//     });
+//     it('should lowercase and trim word before translation', () => {
+//       assert.equal(pigLatin('HeLlO '), 'ellohay');
+//       assert.equal(pigLatin(' RoCkEt'), 'ocketray');
+//     });
+//   });
+// } else {
 
-  getPrompt();
+//   getPrompt();
 
-}
+// }
 
 
 

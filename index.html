@@ -1,15 +1,32 @@
 <!DOCTYPE html>
 <html>
   <head>
+
     <meta charset="utf-8">
-    <title></title>
-    <script src="main.js"></script>
+    <title>PigLatin</title>
   </head>
+  <script src="main.js"></script>
   <body>
-    <h1>Hello World!</h1>
+    <h1>Hello PigLatin!</h1>
     <hr/>
-    <div id="display-element"></div>
-    <button onclick="displayDate()">Click Me</button>
+    <form action="">
+      <label>Enter the Text and CLICK Translate for Pig Latin.</label>
+      <br>
+      
+      <textarea id="translateInput" name="latinInput" cols="60" rows="5"></textarea>
+      <br>
+
+      <button id="translateBtn" onclick="translateBtnClick()">Translate</button>
+      <hr>
+      
+      <label>Here ya go!</label>
+      <br>
+      
+      <textarea id="translateOutput" name="latinOutput" cols="60" rows="5"></textarea>
+      <br>
+      
+      <button id="clearBtn" onclick="clearTextAreas()">Clear</button>
+    </form>
     <hr/>
   </body>
 </html>
